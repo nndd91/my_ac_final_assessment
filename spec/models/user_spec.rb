@@ -7,7 +7,6 @@ RSpec.describe User, type: :model do
   it { should have_many(:likes).dependent(:destroy) }
   it { should have_many(:following_users).through(:followings).source(:followed) }
 
-
   it { should validate_presence_of(:username) }
   describe 'should validate uniqueness of username' do
     subject { User.new(username: 'dsa') }
@@ -20,6 +19,14 @@ RSpec.describe User, type: :model do
     let(:user2) { create(:user) }
     let!(:following) { create(:following, follower: user, followed: user2)}
     it { expect(user.following?(user2)).to eq(true) }
+  end
+
+  describe '#not_following' do
+    let(:user) { create(:user) }
+    let(:user2) { create(:user) }
+    let(:user3) { create(:user) }
+    let!(:following) { create(:following, follower: user, followed: user2)}
+    it { expect(user.not_following).to match_array([user3]) }
   end
 
   describe '#follow' do

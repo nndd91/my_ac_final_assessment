@@ -1,16 +1,14 @@
 <h1>Notes</h1>
 <div class="col-md-12" style="margin: 10px 0;">
-  <%= link_to 'New Note', new_note_path, class:"btn btn-default pull-right" %>
-</div>
-<div class="col-md-9">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      Random Joke
-    </div>
+  <div class="panel panel-default col-md-9">
     <div class="panel-body">
-      <%= @joke %>
+      Random Joke: <%= @joke %>
     </div>
   </div>
+  <%= link_to 'New Note', new_note_path, class:"btn btn-default pull-right col-md-2" %>
+</div>
+<div class="col-md-9">
+
 
   <% @notes.each do |note| %>
     <div class="panel panel-default">
@@ -29,10 +27,12 @@
             <%= link_to 'Like', note_likes_path(note_id: note), method: :post, class: 'btn btn-success btn-xs' %>
           <% end %>
         <% end %>
-        <div class="pull-right">
-          <%= link_to 'Edit', edit_note_path(note), class: 'btn btn-warning btn-xs' %>
-          <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-xs' %>
-        </div>
+        <% if note.user == current_user %>
+          <div class="pull-right">
+            <%= link_to 'Edit', edit_note_path(note), class: 'btn btn-warning btn-xs' %>
+            <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-xs' %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>
@@ -40,7 +40,7 @@
 <div class="col-md-3">
   <div class="panel panel-default">
     <div class="panel-heading">
-      Users
+      <%= @label %>
     </div>
     <div class="panel-body">
       <table class="table">

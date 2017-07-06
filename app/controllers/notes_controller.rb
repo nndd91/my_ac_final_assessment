@@ -5,11 +5,14 @@ class NotesController < ApplicationController
 
   def index
     if user_signed_in?
+      @label = "Friends"
       @notes = current_user.feed
+      @users = current_user.following_users
     else
+      @label = "Users"
       @notes = Note.all
+      @users = User.all
     end
-    @users = User.all
 
     url = "https://icanhazdadjoke.com/"
     headers = {"Accept" => "application/json"}

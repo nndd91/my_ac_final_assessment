@@ -6,7 +6,7 @@ class FollowingsController < ApplicationController
   end
 
   def otherusers
-    @users = User.all
+    @users = current_user.not_following
   end
 
   def create
