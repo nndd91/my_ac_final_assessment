@@ -11,11 +11,13 @@ class FollowingsController < ApplicationController
 
   def create
     current_user.follow(@user)
+    StatusUpdateMailer.follow_update_email(@user, current_user, "followed").deliver_now
     redirect_back(fallback_location: root_path)
   end
 
   def destroy
     current_user.followings.find_by(followed_id: @user).destroy
+    StatusUpdateMailer.follow_update_email(@user, current_user, "unfollowed").deliver_now
     redirect_back(fallback_location: root_path)
   end
 

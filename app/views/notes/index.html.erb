@@ -3,6 +3,15 @@
   <%= link_to 'New Note', new_note_path, class:"btn btn-default pull-right" %>
 </div>
 <div class="col-md-9">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Random Joke
+    </div>
+    <div class="panel-body">
+      <%= @joke %>
+    </div>
+  </div>
+
   <% @notes.each do |note| %>
     <div class="panel panel-default">
       <div class="panel-heading">

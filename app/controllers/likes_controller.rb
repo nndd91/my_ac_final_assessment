@@ -3,11 +3,13 @@ class LikesController < ApplicationController
 
   def create
     current_user.like(@note)
+    StatusUpdateMailer.likes_update_email(current_user, @note, "liked").deliver_now
     redirect_back(fallback_location: root_path)
   end
 
   def destroy
     current_user.unlike(@note)
+    StatusUpdateMailer.likes_update_email(current_user, @note, "unliked").deliver_now
     redirect_back(fallback_location: root_path)
   end
 

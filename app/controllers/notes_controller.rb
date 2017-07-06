@@ -1,10 +1,15 @@
 class NotesController < ApplicationController
+  require 'rest-client'
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   def index
     @notes = Note.all
     @users = User.all
+
+    url = "https://icanhazdadjoke.com/"
+    headers = {"Accept" => "application/json"}
+    @joke = JSON.parse(RestClient.get(url, headers))['joke']
   end
 
   def show
