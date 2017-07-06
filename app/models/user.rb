@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :followings, class_name: "Following", foreign_key: "follower_id"
   has_many :likes, dependent: :destroy
 
+  # 2 tiered relations
+  has_many :following_users, through: :followings, source: :followed
+
   def following?(user)
     followings.exists?(followed_id: user)
   end
@@ -31,5 +34,11 @@ class User < ApplicationRecord
   def unlike(note)
     @like = likes.find_by(note: note)
     @like.destroy
+  end
+
+  def feed
+    Note.where("user_id IN (:following_ids) OR user_id = :user_id",
+               following_ids: following_user_ids,
+               user_id: id)
   end
 end

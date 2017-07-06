@@ -4,7 +4,11 @@ class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   def index
-    @notes = Note.all
+    if user_signed_in?
+      @notes = current_user.feed
+    else
+      @notes = Note.all
+    end
     @users = User.all
 
     url = "https://icanhazdadjoke.com/"

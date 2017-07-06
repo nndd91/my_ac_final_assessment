@@ -2,7 +2,7 @@ class FollowingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, except: [:index, :otherusers]
   def index
-    @followings = current_user.followings
+    @users = current_user.following_users
   end
 
   def otherusers

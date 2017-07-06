@@ -31,4 +31,16 @@ User.create(email: email, password: password, username: username, firstname: fir
     @note = @user.notes.build(content: content)
     @note.save
   end
+
+  10.times do
+    offset = rand(User.count)
+    user2 = User.offset(offset).limit(1).first
+    @user.follow(user2)
+  end
+
+  10.times do
+    offset = rand(Note.count)
+    note = Note.offset(offset).limit(1).first
+    @user.like(note)
+  end
 end

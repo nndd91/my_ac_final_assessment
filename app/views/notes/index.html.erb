@@ -22,12 +22,13 @@
       </div>
       <div class="panel-footer">
         Likes: <%= note.likes.count %>
-        <% if current_user.liked?(note) %>
-          <%= link_to 'Unlike', note_like_path(note_id: note, id: note), method: :delete, class: 'btn btn-danger btn-xs' %>
-        <% else %>
-          <%= link_to 'Like', note_likes_path(note_id: note), method: :post, class: 'btn btn-success btn-xs' %>
+        <% if user_signed_in? %>
+          <% if current_user.liked?(note) %>
+            <%= link_to 'Unlike', note_like_path(note_id: note, id: note), method: :delete, class: 'btn btn-danger btn-xs' %>
+          <% else %>
+            <%= link_to 'Like', note_likes_path(note_id: note), method: :post, class: 'btn btn-success btn-xs' %>
+          <% end %>
         <% end %>
-
         <div class="pull-right">
           <%= link_to 'Edit', edit_note_path(note), class: 'btn btn-warning btn-xs' %>
           <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-xs' %>

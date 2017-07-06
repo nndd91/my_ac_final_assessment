@@ -72,6 +72,11 @@ GEM
       railties (>= 3.2, < 5.2)
     erubi (1.6.1)
     execjs (2.7.0)
+    factory_girl (4.8.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.8.0)
+      factory_girl (~> 4.8.0)
+      railties (>= 3.0.0)
     faker (1.7.3)
       i18n (~> 0.5)
     ffi (1.9.18)
@@ -252,6 +257,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
+  factory_girl_rails
   faker
   guard-rspec
   jbuilder (~> 2.5)
