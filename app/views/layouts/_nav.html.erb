@@ -1,9 +1,17 @@
-<div class="nav navbar-default navbar-static-top">
-  <div class="container">
-    <ul>
+<div class="nav navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
       <li><%= link_to 'Home', root_path %></li>
-      <li><%= link_to 'Sign in', new_user_session_path %></li>
-      <li><%= link_to 'Signout', destroy_user_session_path %></li>
+
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+        <li><%= link_to "Welcome #{current_user.username}", edit_user_registration_path %></li>
+        <li><%= link_to 'Signout', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'Sign in', new_user_session_path %></li>
+      <% end %>
     </ul>
   </div>
 </div>
