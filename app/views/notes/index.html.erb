@@ -1,16 +1,41 @@
 <h1>Notes</h1>
-<%= link_to 'New Note', new_note_path %>
-<% @notes.each do |note| %>
+<div class="col-md-12" style="margin: 10px 0;">
+  <%= link_to 'New Note', new_note_path, class:"btn btn-default pull-right" %>
+</div>
+<div class="col-md-9">
+  <% @notes.each do |note| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= link_to "#{note.user.username}", '#' %></b> posted on: <%= note.created_at %>
+      </div>
+      <div class="panel-body">
+        <%= note.content %>
+      </div>
+      <div class="panel-footer">
+        <%= link_to 'Edit', edit_note_path(note), class: 'btn btn-warning btn-xs' %>
+        <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-xs' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="col-md-3">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <%= link_to "#{note.user.username}", '#' %></b> posted on: <%= note.created_at %>
+      Users
     </div>
     <div class="panel-body">
-      <%= note.content %>
-    </div>
-    <div class="panel-footer">
-      <%= link_to 'Edit', edit_note_path(note), class: 'btn btn-warning btn-xs' %>
-      <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-xs' %>
-    </div>
+      <table class="table">
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= user.username %>
+            </td>
+            <td>
+              <%= user.current_sign_in_at %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
   </div>
-<% end %>
+  </div>
+</div>
