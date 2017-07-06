@@ -18,7 +18,7 @@ class User < ApplicationRecord
   end
 
   def not_following
-    User.where("id NOT IN (:following_ids) AND id != :user_id", 
+    User.where("id NOT IN (:following_ids) AND id != :user_id",
                following_ids: following_user_ids,
                user_id: id)
   end

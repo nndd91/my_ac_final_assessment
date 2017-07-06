@@ -15,7 +15,13 @@ username = "demo"
 firstname = "demo"
 lastname = "demo"
 
-User.create(email: email, password: password, username: username, firstname: firstname, lastname: lastname)
+@user = User.create(email: email, password: password, username: username, firstname: firstname, lastname: lastname)
+
+10.times do
+  content = Faker::HarryPotter.quote
+  @note = @user.notes.build(content: content)
+  @note.save
+end
 
 10.times do
   email = Faker::Internet.email
