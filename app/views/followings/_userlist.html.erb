@@ -15,8 +15,7 @@
           Actions
         </th>
       </tr>
-      <% @followings.each do |following| %>
-        <% user = following.followed %>
+      <% userlist.each do |user| %>
         <tr>
           <td>
             <%= user.username %>
