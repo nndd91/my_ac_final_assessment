@@ -5,3 +5,30 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.destroy_all
+Note.destroy_all
+
+email = "demo@demo.com"
+password = "password"
+username = "demo"
+firstname = "demo"
+lastname = "demo"
+
+User.create(email: email, password: password, username: username, firstname: firstname, lastname: lastname)
+
+10.times do
+  email = Faker::Internet.email
+  password = "password"
+  username = Faker::Internet.user_name
+  firstname = Faker::Name.first_name
+  lastname = Faker::Name.last_name
+
+  @user = User.create(email: email, password: password, username: username, firstname: firstname, lastname: lastname)
+
+  10.times do
+    content = Faker::HarryPotter.quote
+    @note = @user.notes.build(content: content)
+    @note.save
+  end
+end

@@ -4,5 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates :username, presence: true, uniqueness: { case_sensitive: false }
-  has_many :notes
+  has_many :notes, dependent: :destroy
 end
