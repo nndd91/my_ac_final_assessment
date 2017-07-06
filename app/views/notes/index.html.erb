@@ -1,2 +1,17 @@
 <h1>Notes#index</h1>
 <p>Find me in app/views/notes/index.html.erb</p>
+<%= link_to 'New Note', new_note_path %>
+<% @notes.each do |note| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= link_to "#{note.user.username}", '#' %></b> posted on: <%= note.created_at %>
+    </div>
+    <div class="panel-body">
+      <%= note.content %>
+    </div>
+    <div class="panel-footer">
+      <%= link_to 'Edit', edit_note_path(note), class: 'btn btn-warning btn-xs' %>
+      <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger btn-xs' %>
+    </div>
+  </div>
+<% end %>

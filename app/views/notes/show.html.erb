@@ -1,2 +1,10 @@
 <h1>Notes#show</h1>
 <p>Find me in app/views/notes/show.html.erb</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= @note.user.username %>
+  </div>
+  <div class="panel-body">
+    <%= @note.content %>
+  </div>
+</div>
